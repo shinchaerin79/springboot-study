@@ -1,0 +1,3 @@
+[submodule "springboot-study-config"]
+	path = springboot-study-config
+	url = https://github.com/shinchaerin79/springboot-study-config.git
