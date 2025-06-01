@@ -28,12 +28,16 @@ public class User extends BaseTimeEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  // 소셜 로그인 시 이메일 자체를 아이디로
   @Column(name = "username", nullable = false, unique = true)
   private String username;
 
   @JsonIgnore
-  @Column(name = "password", nullable = false)
+  @Column(name = "password")
   private String password;
+
+  @Column(name = "provider", nullable = false)
+  private String provider;
 
   @JsonIgnore
   @Column(name = "refresh_token")
