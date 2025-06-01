@@ -33,6 +33,7 @@ public class UserService {
     User user = User.builder()
         .username(request.getUsername())
         .password(encodedPassword)
+        .provider("custom")
         .build();
 
     // 저장 및 로깅
