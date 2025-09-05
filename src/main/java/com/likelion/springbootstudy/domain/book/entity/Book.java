@@ -1,11 +1,18 @@
 package com.likelion.springbootstudy.domain.book.entity;
 
 import com.likelion.springbootstudy.global.common.BaseTimeEntity;
+import com.likelion.springbootstudy.domain.book.entity.Category;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,38 +21,40 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Table(name = "book")
 public class Book extends BaseTimeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
-  private String title;   // 제목
+  @Column(name = "title", nullable = false)
+  private String title;
 
-  @Column(nullable = false)
-  private String author;  // 저자
+  @Column(name = "author", nullable = false)
+  private String author;
 
-  @Column(nullable = false)
-  private String price;   // 가격
+  @Column(name = "publisher", nullable = false)
+  private String publisher;
 
-  @Column(nullable = false)
-  private String publisher; // 출판사
+  @Column(name = "price", nullable = false)
+  private Integer price;
 
-  public void setTitle(String title) {
-    this.title = title;
+  @Column(name = "description", nullable = false)
+  private String description;
+
+  @Column(name = "release_date", nullable = false)
+  private String releaseDate;
+
+  @Column(name = "category_list", nullable = false)
+  private List<Category> categoryList;
+
+  @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<BookImage> bookImages = new ArrayList<>();
+
+  public void addBookImages(List<BookImage> bookImages) {
+    this.bookImages = bookImages;
   }
-  public void setAuthor(String author) {
-    this.author = author;
-  }
-  public void setPrice(String price) {
-    this.price = price;
-  }
-  public void setPublisher(String publisher) {
-    this.publisher = publisher;
-  }
-
 }
-
