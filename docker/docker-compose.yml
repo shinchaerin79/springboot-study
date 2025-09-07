@@ -53,7 +53,7 @@ services:
       - sbs-network
     restart: unless-stopped
     command:
-      - --adds=:8080
+      - --addr=:8080
       - --filter=status=running
       - --filter=label=dozzle.include=true
 
