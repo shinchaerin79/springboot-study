@@ -48,10 +48,14 @@ services:
     environment:
       - TZ=Asia/Seoul
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - sbs-network
     restart: unless-stopped
+    command:
+      - --adds=:8080
+      - --filter=status=running
+      - --filter=label=dozzle.include=true
 
 networks:
   sbs-network:
