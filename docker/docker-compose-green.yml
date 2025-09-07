@@ -13,6 +13,7 @@ services:
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
       SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASS}
+      SPRING_JWT_SECRET: ${JWT_SECRET}
     command: [ "java", "-jar", "app.jar" ]
     depends_on:
       mysql:
