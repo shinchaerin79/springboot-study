@@ -19,7 +19,7 @@ public class BookMapper {
         .releaseDate(book.getReleaseDate())
         .categoryList(book.getCategoryList())
         .bookImagesUrl(
-            book.getBookImages().stream()
+            book.getBookImageList().stream()
                 .map(BookImage::getImageUrl)
                 .toList()
         )
