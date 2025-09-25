@@ -1,9 +1,10 @@
 package com.likelion.springbootstudy.domain.auth.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.likelion.springbootstudy.domain.auth.dto.response.LoginResponse;
 import com.likelion.springbootstudy.domain.user.entity.Role;
 import com.likelion.springbootstudy.domain.user.entity.User;
-import org.springframework.stereotype.Component;
 
 @Component
 public class AuthMapper {
@@ -17,11 +18,8 @@ public class AuthMapper {
         .expirationTime(expirationTime)
         .build();
   }
+
   public static User fromOAuth(String email, String provider) {
-    return User.builder()
-        .username(email)
-        .provider(provider)
-        .role(Role.USER)
-        .build();
+    return User.builder().username(email).provider(provider).role(Role.USER).build();
   }
 }

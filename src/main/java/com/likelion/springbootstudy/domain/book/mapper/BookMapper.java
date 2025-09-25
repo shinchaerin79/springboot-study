@@ -1,9 +1,10 @@
 package com.likelion.springbootstudy.domain.book.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.likelion.springbootstudy.domain.book.dto.response.BookResponse;
 import com.likelion.springbootstudy.domain.book.entity.Book;
 import com.likelion.springbootstudy.domain.book.entity.BookImage;
-import org.springframework.stereotype.Component;
 
 @Component
 public class BookMapper {
@@ -18,12 +19,7 @@ public class BookMapper {
         .description(book.getDescription())
         .releaseDate(book.getReleaseDate())
         .categoryList(book.getCategoryList())
-        .bookImagesUrl(
-            book.getBookImageList().stream()
-                .map(BookImage::getImageUrl)
-                .toList()
-        )
+        .bookImagesUrl(book.getBookImageList().stream().map(BookImage::getImageUrl).toList())
         .build();
   }
-
 }

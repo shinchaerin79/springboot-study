@@ -1,9 +1,11 @@
 package com.likelion.springbootstudy.global.s3.exception;
 
+import org.springframework.http.HttpStatus;
+
 import com.likelion.springbootstudy.global.exception.model.BaseErrorCode;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor

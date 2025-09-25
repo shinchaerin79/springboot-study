@@ -1,8 +1,10 @@
 package com.likelion.springbootstudy.domain.book.dto.response;
 
-import com.likelion.springbootstudy.domain.book.entity.Category;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+
+import com.likelion.springbootstudy.domain.book.entity.Category;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -38,4 +40,3 @@ public class BookResponse {
   @Schema(description = "이미지 URL 리스트")
   private List<String> bookImagesUrl;
 }
-
