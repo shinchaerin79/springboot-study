@@ -47,6 +47,10 @@ jobs:
         if: steps.changes.outputs.application == 'true'
         run: chmod +x gradlew
 
+      - name: Style check
+        if: steps.changes.outputs.application == 'true'
+        run: ./gradlew spotlessCheck --console=plain
+
       - name: Build with Gradle Wrapper
         if: steps.changes.outputs.application == 'true'
         run: ./gradlew clean build -x test
