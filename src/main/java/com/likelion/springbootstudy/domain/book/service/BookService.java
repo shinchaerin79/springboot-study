@@ -77,6 +77,13 @@ public class BookService {
     return bookList.stream().map(bookMapper::toBookResponse).toList();
   }
 
+  // 책 단일 조회
+  public BookResponse getBookById(Long id) {
+    Book book = bookRepository.findById(id)
+        .orElseThrow(() -> new CustomException(BookErrorCode.BOOK_NOT_FOUND));
+    return bookMapper.toBookResponse(book);
+  }
+
   // 책 정보 수정
   @Transactional
   public BookResponse updateBook(Long id, BookRequest request, List<Category> categoryList,
@@ -124,5 +131,23 @@ public class BookService {
 
     bookRepository.save(book);
     return bookMapper.toBookResponse(book);
+  }
+
+  public void deleteBook(Long id) {
+    Book book = bookRepository.findById(id)
+        .orElseThrow(() -> new CustomException(BookErrorCode.BOOK_NOT_FOUND));
+
+    // 이미지 삭제 (있으면 지우고, 없으면 무시)
+    if (book.getBookImageList() != null) {
+      book.getBookImageList().forEach(img -> {
+        try {
+          s3Service.deleteFile(img.getImageUrl());
+        } catch (Exception e) {
+          // 파일 없거나 에러여도 무시
+        }
+      });
+    }
+
+    bookRepository.delete(book);
   }
 }

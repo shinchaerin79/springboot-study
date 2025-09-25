@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,18 @@ public class BookController {
   }
 
   @Operation(
+      summary = "등록된 책 단일 조회",
+      description = "책 ID를 이용해 단일 책 정보를 조회합니다."
+  )
+  @GetMapping("/{bookId}")
+  public ResponseEntity<BaseResponse<BookResponse>> getBookById(
+      @Parameter(description = "조회할 책 식별자", example = "1") @PathVariable Long bookId
+  ) {
+    BookResponse response = bookService.getBookById(bookId);
+    return ResponseEntity.ok(BaseResponse.success("책 단일 조회에 성공했습니다", response));
+  }
+
+  @Operation(
       summary = "책 수정",
       description = "책 정보를 수정하고, 수정된 책 정보를 반환합니다."
   )
@@ -69,5 +82,17 @@ public class BookController {
   ) {
     BookResponse response = bookService.updateBook(bookId, request, categoryList, imageList);
     return ResponseEntity.ok(BaseResponse.success("책 수정에 성공했습니다.", response));
+  }
+
+  @Operation(
+      summary = "책 삭제",
+      description = "책 ID를 이용해 책을 삭제합니다."
+  )
+  @DeleteMapping("/{bookId}")
+  public ResponseEntity<BaseResponse> deleteBook(
+      @Parameter(description = "삭제할 책 식별자", example = "1") @PathVariable Long bookId
+  ) {
+    bookService.deleteBook(bookId);
+    return ResponseEntity.ok(BaseResponse.success("책 삭제에 성공했습니다."));
   }
 }
