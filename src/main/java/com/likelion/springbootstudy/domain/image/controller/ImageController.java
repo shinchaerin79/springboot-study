@@ -34,12 +34,11 @@ public class ImageController {
   @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   public ResponseEntity<BaseResponse<ImageResponse>> createBook(
       @Parameter(
-          description = "이미지들",
-          content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
-      @RequestPart(value = "images")
-      List<MultipartFile> images) {
+              description = "이미지들",
+              content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
+          @RequestPart(value = "images")
+          List<MultipartFile> images) {
     ImageResponse response = imageService.uploadImages(images);
     return ResponseEntity.ok(BaseResponse.success("이미지 등록에 성공하였습니다.", response));
   }
 }
-

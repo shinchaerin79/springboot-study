@@ -35,4 +35,3 @@ public class BaseResponse<T> {
     return new BaseResponse<>(false, code, message, null);
   }
 }
-

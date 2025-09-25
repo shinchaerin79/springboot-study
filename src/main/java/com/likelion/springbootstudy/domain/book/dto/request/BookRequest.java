@@ -1,15 +1,13 @@
 package com.likelion.springbootstudy.domain.book.dto.request;
 
-import com.likelion.springbootstudy.domain.book.entity.Category;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
 @Schema(title = "CreateBookRequest DTO", description = "책 생성을 위한 데이터 전송")
-public class CreateBookRequest {
+public class BookRequest {
 
   @Schema(description = "책 제목", example = "그리고 아무도 없었다")
   private String title;
@@ -28,7 +26,4 @@ public class CreateBookRequest {
 
   @Schema(description = "출간날짜", example = "2025년 3월 22일")
   private String releaseDate;
-
-  @Schema(description = "카테고리")
-  private List<Category> categoryList;
 }

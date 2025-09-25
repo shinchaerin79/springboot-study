@@ -1,9 +1,11 @@
 package com.likelion.springbootstudy.domain.auth.exception;
 
+import org.springframework.http.HttpStatus;
+
 import com.likelion.springbootstudy.global.exception.model.BaseErrorCode;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor

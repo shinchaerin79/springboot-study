@@ -31,4 +31,3 @@ public class Image {
   @Column(name = "file_name", nullable = false)
   private String originalFileName;
 }
-

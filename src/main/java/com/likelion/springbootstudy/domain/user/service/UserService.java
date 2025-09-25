@@ -1,5 +1,9 @@
 package com.likelion.springbootstudy.domain.user.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.likelion.springbootstudy.domain.user.dto.request.SignUpRequest;
 import com.likelion.springbootstudy.domain.user.dto.response.SignUpResponse;
 import com.likelion.springbootstudy.domain.user.entity.User;
@@ -7,11 +11,9 @@ import com.likelion.springbootstudy.domain.user.exception.UserErrorCode;
 import com.likelion.springbootstudy.domain.user.mapper.UserMapper;
 import com.likelion.springbootstudy.domain.user.repository.UserRepository;
 import com.likelion.springbootstudy.global.exception.CustomException;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -32,11 +34,12 @@ public class UserService {
     String encodedPassword = passwordEncoder.encode(request.getPassword());
 
     // 유저 엔티티 생성
-    User user = User.builder()
-        .username(request.getUsername())
-        .password(encodedPassword)
-        .provider("custom")
-        .build();
+    User user =
+        User.builder()
+            .username(request.getUsername())
+            .password(encodedPassword)
+            .provider("custom")
+            .build();
 
     // 저장 및 로깅
     User savedUser = userRepository.save(user);
